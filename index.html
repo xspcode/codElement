@@ -1,18 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil</title>
-  <link rel="icon" href="fav.ico" type="image/x-icon">
-  <link rel="manifest" href="/codElement/manifest.json">
-</head>
-<body>
-<script>
-  // Attendre 5 secondes avant de rediriger
-  setTimeout(function() {
-    window.location.href = 'https://www.buymeacoffee.com/code.xsp/posts';
-  }, 5000); // 5000 millisecondes = 5 secondes
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil</title>
+    <link rel="icon" href="fav.ico" type="image/x-icon" />
+    <link rel="manifest" href="/manifest.json" />
+    <style>
+      /* Styles de base pour le body */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff; /* Ou une autre couleur de fond de votre choix */
+      }
+
+      /* Styles pour le loader */
+      .loader {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+      }
+
+      /* Après le loader, ajoutez le pseudo-élément pour créer l'animation */
+      .loader:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #3498db; /* Utilisez la couleur de votre logo */
+        border-color: #3498db transparent #3498db transparent; /* Alternance des couleurs */
+        animation: loader-spin 1.2s linear infinite;
+      }
+
+      /* Keyframes pour l'animation du loader */
+      @keyframes loader-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .access-button {
+        display: none; /* Reste caché initialement */
+        margin-top: 130px; /* Espacement au-dessus du bouton */
+        padding: 10px 20px; /* Espacement intérieur pour le rendre plus grand */
+        font-size: 18px; /* Taille de la police plus grande */
+        color: white; /* Couleur du texte */
+        background-color: #3498db; /* Couleur de fond du bouton */
+        border: none; /* Pas de bordure */
+        border-radius: 5px; /* Bordures arrondies */
+        cursor: pointer; /* Change le curseur en main quand on survole le bouton */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner un effet en relief */
+        transition: background-color 0.3s, transform 0.3s; /* Animation douce */
+      }
+
+      .access-button:hover {
+        background-color: #2874a6; /* Couleur de fond plus foncée au survol */
+        transform: scale(1.05); /* Légère augmentation de taille au survol */
+      }
+
+      .access-button:active {
+        background-color: #1b4f72; /* Couleur encore plus foncée lors du clic */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre plus petite pour effet de pression */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader"></div>
+    <button
+      class="access-button"
+      onclick="window.location.href='https://www.buymeacoffee.com/code.xsp/posts';"
+    >
+      Accédez maintenant
+    </button>
+
+    <script>
+      setTimeout(function () {
+        document.querySelector(".loader").style.display = "none"; // Cache le loader
+        document.querySelector(".access-button").style.display = "block"; // Affiche le bouton
+        window.location.href = "https://www.buymeacoffee.com/code.xsp/posts"; // Redirige après l'affichage du bouton
+      }, 5000); // 5000 millisecondes = 5 secondes
+    </script>
+  </body>
 </html>
