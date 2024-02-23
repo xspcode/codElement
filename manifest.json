@@ -1,0 +1,17 @@
+{
+    "name": "codeElement",
+    "short_name": "codeElement",
+    "description": "Premium Web Templates",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#7B3FFF",
+    "icons": [
+      {
+        "src": "icon/path.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
+  
