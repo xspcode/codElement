@@ -7,81 +7,72 @@
     <link rel="icon" href="fav.ico" type="image/x-icon" />
     <link rel="manifest" href="/codElement/manifest.json" />
     <style>
-      /* Styles de base pour le body */
-      body {
+      /* Styles de base */
+      body, html {
         margin: 0;
-        height: 100vh;
+        padding: 0;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #fff; /* Ou une autre couleur de fond de votre choix */
+        background-color: #000; /* Couleur de fond de votre choix */
+        color: white;
+        font-family: 'Arial', sans-serif; /* Ajoutez votre police préférée */
+      }
+
+      /* Responsivité de l'image du logo */
+      img {
+        max-width: 100px; /* Taille maximale du logo */
+        height: auto;
+        margin-bottom: 20px; /* Espacement entre le logo et le loader */
       }
 
       /* Styles pour le loader */
       .loader {
-        display: inline-block;
-        width: 80px;
-        height: 80px;
-      }
-
-      /* Après le loader, ajoutez le pseudo-élément pour créer l'animation */
-      .loader:after {
-        content: " ";
-        display: block;
-        width: 64px;
-        height: 64px;
-        margin: 8px;
+        border: 6px solid rgba(255, 255, 255, 0.3);
+        border-left-color: #5CE1E6;
         border-radius: 50%;
-        border: 6px solid #3498db; /* Utilisez la couleur de votre logo */
-        border-color: #3498db transparent #3498db transparent; /* Alternance des couleurs */
-        animation: loader-spin 1.2s linear infinite;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
       }
 
-      /* Keyframes pour l'animation du loader */
-      @keyframes loader-spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
 
+      /* Styles pour le bouton */
       .access-button { 
         display: none; /* Reste caché initialement */
-        margin-top: 130px; /* Espacement au-dessus du bouton */
-        padding: 10px 20px; /* Espacement intérieur pour le rendre plus grand */
-        font-size: 18px; /* Taille de la police plus grande */
-        color: white; /* Couleur du texte */
-        background-color: #3498db; /* Couleur de fond du bouton */
-        border: none; /* Pas de bordure */
-        border-radius: 5px; /* Bordures arrondies */
-        cursor: pointer; /* Change le curseur en main quand on survole le bouton */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner un effet en relief */
-        transition: background-color 0.3s, transform 0.3s; /* Animation douce */
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: white;
+        background-color: #FF66C4;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
       }
 
-      .access-button:hover {
-        background-color: #2874a6; /* Couleur de fond plus foncée au survol */
-        transform: scale(1.05); /* Légère augmentation de taille au survol */
+      .access-button:hover, .access-button:focus {
+        background-color: #5CE1E6;
+        transform: scale(1.05);
       }
 
       .access-button:active {
-        background-color: #1b4f72; /* Couleur encore plus foncée lors du clic */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre plus petite pour effet de pression */
+        background-color: #1b4f72;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
   <body>
-    <img src="logo.png" />
+    <img src="logo.png" alt="CodeElement Logo" />
     <div class="loader"></div>
-      <button
-        class="access-button"
-        onclick="window.location.href='https://www.buymeacoffee.com/code.xsp/posts';"
-      >
-        Accédez maintenant
-      </button>
+    <button class="access-button" onclick="window.location.href='https://www.buymeacoffee.com/code.xsp/posts';">
+      Accédez maintenant
+    </button>
     <script>
       setTimeout(function () {
         document.querySelector(".loader").style.display = "none"; // Cache le loader
