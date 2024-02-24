@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Composant Footer</title>
+  <style>
+/* Styles de base */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #000; /* Fond noir comme sur les captures d'écran */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Conteneur pour les footers */
+#footer-container {
+  width: 90%;
+  max-width: 1200px; /* Largeur maximale du conteneur */
+  margin: 20px auto; /* Ajout de marge en haut et en bas */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Grille responsive avec des colonnes d'au moins 250px */
+  gap: 20px; /* Espacement entre les éléments */
+}
+
+/* Style de chaque modèle de footer */
+.footer-template {
+  border: none; /* Couleur de bordure inspirée de votre logo */
+  border-radius: 10px; /* Bordures arrondies pour un look moderne */
+  overflow: hidden; /* Empêche les contenus internes de déborder */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombre portée pour un effet 3D */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Indique que l'élément est cliquable */
+}
+
+/* Animation au survol pour le modèle de footer */
+.footer-template:hover {
+  transform: translateY(-5px); /* Déplacement léger vers le haut */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Ombre plus prononcée */
+}
+
+/* Style pour les images de footer avec effet de zoom au survol */
+.footer-template img {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.footer-template:hover img {
+  transform: scale(1.1); /* Zoom avant sur l'image */
+}
+
+/* Style pour le titre */
+.footer-template .title {
+  background-color: #2c3e50; /* Fond sombre pour le titre */
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+/* Style pour le bouton */
+.footer-template a {
+  display: block;
+  background-color: 000;
+  border-radius: 0.8rem;
+  color: #5CE1E6;
+  text-align: center;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+
+/* Media query pour les petits écrans */
+@media (max-width: 600px) {
+  #footer-container {
+    grid-template-columns: 1fr; /* Une colonne pour les écrans très petits */
+  }
+}
+  </style>
+</head>
+<body>
+  <div id="footer-container"></div>
+
+  <script>
+    // Charger les données JSON et générer les éléments du footer
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('footer-container');
+        data.forEach(footer => {
+          const footerElement = document.createElement('div');
+          footerElement.className = 'footer-template';
+          footerElement.innerHTML = `
+            <img src="${footer.image}" alt="${footer.title}">
+            <div class="title">${footer.title}</div>
+            <a href="${footer.url}" target="_blank">Buy Now</a>
+          `;
+          container.appendChild(footerElement);
+        });
+      })
+      .catch(error => console.error('Erreur lors de la récupération des données:', error));
+  </script>
+</body>
+</html>
