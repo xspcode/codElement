@@ -13,7 +13,6 @@ html, body {
   font-family: 'Arial', sans-serif;
   background-color: #000; /* Fond noir */
   color: white;
-
 }
 
 /* Conteneur pour les footers */
@@ -65,19 +64,25 @@ html, body {
 
 /* Style du bouton/lien */
 .footer-template a {
-  display: inline-block;
-  width: 100%;
-  padding: 15px 20px;
-  background-color: #3498db; /* Couleur vibrante pour l'action */
-  color: white;
+  display: block;
+  width: calc(100% - 30px); /* Ajustement pour prendre en compte le padding */
+  margin: 10px 15px; /* Centrage du bouton dans la carte */
+  padding: 15px;
+  background-color: #1c1c1e; /* Fond du bouton correspondant au fond des cartes */
+  color: #32CABA; /* Vert bleu clair pour le texte */
   text-align: center;
   text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s;
+  border: 2px solid transparent; /* Préparation pour l'effet de bordure au survol */
+  transition: background-color 0.3s, border 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Légère ombre pour un effet en relief */
 }
 
 .footer-template a:hover {
-  background-color: #2ecc71; /* Changement de couleur pour l'interaction */
+  background-color: #1c1c1e; /* Maintient la couleur de fond */
+  color: #32CABA; /* Maintient la couleur du texte */
+  border-color: #FF69B4; /* Bordure rose au survol */
+  box-shadow: 0 0 8px #FF69B4; /* Ombre extérieure rose pour un effet de brillance, sans zoomer */
 }
 
   </style>
