@@ -105,7 +105,7 @@
         color: #ff69b4; /* Change la couleur du texte en rose au survol */
       }
       /* Style pour les boutons de filtre */
-      .filter-button {
+      .filter-select {
         display: inline-block;
         padding: 10px 20px;
         background-color: transparent;
@@ -114,14 +114,13 @@
         text-decoration: none;
         font-weight: bold;
         transition: color 0.3s ease;
-
         border: 2px solid transparent; /* Prépare le bouton pour un effet de bordure */
         cursor: pointer; /* Change le curseur pour indiquer la possibilité de cliquer */
-        margin: 5px; /* Espacement autour des boutons */
+        margin: 20px auto; /* Centrer le select dans la div */
         position: relative;
       }
 
-      .filter-button::after {
+      .filter-select::after {
         content: "";
         position: absolute;
         width: 0;
@@ -132,108 +131,57 @@
         transition: width 0.3s ease, left 0.3s ease, background-color 0.3s ease;
       }
 
-      .filter-button:hover::after {
+      .filter-select:hover::after {
         width: 100%;
         left: 0;
         background-color: #ff69b4; /* Rose au survol */
       }
 
-      .filter-button:hover {
+      .filter-select:hover {
         color: #ff69b4;
       }
     </style>
   </head>
   <body>
-    <div id="filter-buttons">
-      <button class="filter-button" onclick="filterCategory('All')">Tous</button>
-      <button class="filter-button" onclick="filterCategory('Page Structures', 'Footers')">
-        Footers
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Structures', 'Login Pages')">
-        Login Pages
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Structures', 'Navigation Menus')">
-        Navigation Menus
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Structures', 'Sidebars')">
-        Sidebars
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Structures', 'Signup Pages')">
-        Signup Pages
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Dropzones')">
-        Dropzones
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Cards')">
-        Login Pages
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Accordion')">
-        Accordion
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Buttons')">
-        Buttons
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Charts')">
-        Charts
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Drag and Drop')">
-        Drag and Drop
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Dropdown Menu')">
-        Dropdown Menu
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Image Galleries')">
-        Image Galleries
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Pricing')">
-        Pricing
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Scroll Snap')">
-        Scroll Snap
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Profile Cards')">
-        Profile Cards
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Scrolling')">
-        Scrolling
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Socials')">
-        Socials
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Tabs')">
-        Tabs
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Vertical Tabs')">
-        Vertical Tabs
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Modals')">
-        Modals
-      </button>
-      <button class="filter-button" onclick="filterCategory('Page Elements', 'Tables')">
-        Tables
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Widgets')">
-        Widgets
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Parallax')">
-        Parallax
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Gifts Animation')">
-        Gifts Animation
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Form Controls')">
-        Form Controls
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Animation')">
-        Animation
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Card Payment')">
-        Card Payment
-      </button>
-      <button class="filter-button" onclick="filterCategory('More Items', 'Toast Notification')">
-        Toast Notification
-      </button>
-      <!-- Ajoutez des boutons pour d'autres sous-catégories au besoin -->
+    <div id="filter-select">
+      <select class="filter-select" onchange="filterCategory('Page Structures', this.value)">
+        <option value="All">All Page Structures</option>
+        <option value="Footers">Footers</option>
+        <option value="Login Pages">Login Pages</option>
+        <option value="Navigation Menus">Navigation Menus</option>
+        <option value="Sidebars">Sidebars</option>
+        <option value="Signup Pages">Signup Pages</option>
+      </select>
+      <select class="filter-select" onchange="filterCategory('Page Elements', this.value)">
+        <option value="All">All Page Elements</option>
+        <option value="Dropzones">Dropzones</option>
+        <option value="Cards">Cards</option>
+        <option value="Accordion">Accordion</option>
+        <option value="Buttons">Buttons</option>
+        <option value="Charts">Charts</option>
+        <option value="Drag and Drop">Drag and Drop</option>
+        <option value="Dropdown Menu">Dropdown Menu</option>
+        <option value="Image Galleries">Image Galleries</option>
+        <option value="Pricing">Pricing</option>
+        <option value="Scroll Snap">Scroll Snap</option>
+        <option value="Profile Cards">Profile Cards</option>
+        <option value="Scrolling">Scrolling</option>
+        <option value="Socials">Socials</option>
+        <option value="Tabs">Tabs</option>
+        <option value="Vertical Tabs">Vertical Tabs</option>
+        <option value="Modals">Modals</option>
+        <option value="Tables">Tables</option>
+      </select>
+      <select class="filter-select" onchange="filterCategory('More Items', this.value)">
+        <option value="All">All More Items</option>
+        <option value="Widgets">Widgets</option>
+        <option value="Parallax">Parallax</option>
+        <option value="Gifts Animation">Gifts Animation</option>
+        <option value="Form Controls">Form Controls</option>
+        <option value="Animation">Animation</option>
+        <option value="Card Payment">Card Payment</option>
+        <option value="Toast Notification">Toast Notification</option>
+      </select>
     </div>
     <div id="library-container"></div>
     <!-- Mise à jour de l'ID pour correspondre au nouveau nom de fichier -->
