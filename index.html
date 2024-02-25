@@ -47,23 +47,35 @@
         display: none; /* Reste caché initialement */
         padding: 10px 20px;
         font-size: 1rem;
-        color: white;
-        background-color: #FF66C4;
+        color: #32caba;
+        background-color: transparent;
         border: none;
+        border: 1px solid ;
         border-radius: 5px;
         cursor: pointer;
+        text-decoration: none; /* Supprime le soulignement par défaut */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
+        transition: color 0.3s ease, background-color 0.3s ease;
+    
+      }
+      .access-button::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px; /* Épaisseur du soulignement */
+        bottom: 5px; /* Ajustez selon l'espacement désiré du texte au soulignement */
+        left: 50%;
+        background-color: #32caba; /* Couleur initiale du soulignement */
+        transition: width 0.3s ease, background-color 0.3s ease, left 0.3s ease;
+      }
+      .access-button:hover::after {
+        width: 100%; /* Le soulignement s'étend sur toute la largeur au survol */
+        left: 0; /* Alignement correct du soulignement */
+        background-color: #ff69b4; /* Couleur rose au survol */
       }
 
-      .access-button:hover, .access-button:focus {
-        background-color: #5CE1E6;
-        transform: scale(1.05);
-      }
-
-      .access-button:active {
-        background-color: #1b4f72;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      .access-button:hover {
+        color: #ff69b4; /* Change la couleur du texte en rose au survol */
       }
     </style>
   </head>
@@ -71,7 +83,7 @@
     <img src="logo.png" alt="CodeElement Logo" />
     <div class="loader"></div>
     <button class="access-button" onclick="window.location.href='https://sites.google.com/view/codelement/';">
-      Accédez maintenant
+      Access now
     </button>
     <script>
       setTimeout(function () {
