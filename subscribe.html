@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accueil CodeElement</title>
+    <title>Application</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -80,6 +80,9 @@
         font-size: 2.5em;
         color: #5ce1e6;
         background-color: var(--header-background-color);
+      }
+      .typed-cursor {
+        color: #ff66c4; /* Ou la nuance de rose que vous préférez */
       }
 
       .container {
@@ -352,23 +355,22 @@
               <h3>Mises à jour constantes</h3>
               <p>
                 Conlultez les mises à jour régulières et découvrez de nouveaux
-                templates chaque mois.
+                templates.
               </p>
             </div>
             <div class="avantage">
-              <i class="fas fa-headset icon"></i>
-              <h3>Support dédié</h3>
+              <i class="fa-brands fa-google-drive icon"></i>
+              <h3>Hébergement des templates</h3>
               <p>
-                Bénéficiez d'une assistance personnalisée pour tous vos besoins
-                et projets.
+                Pour l'accès aux téléchargements, l'hébergement est assuré sur Google Drive.
               </p>
             </div>
           </div>
-          <button id="subscribe-button" class="btn-subscribe">
+          <button id="subscribe-button" class="btn-subscribe" onclick="window.open('https://www.buymeacoffee.com/code.xsp/membership', '_blank');">
             S'abonner pour 1€/mois
           </button>
         </div>
-        <button id="explore-button" class="btn-explore">Explorer</button>
+        <button id="explore-button" class="btn-explore" onclick="window.open('https://xspcode.github.io/codElement/library.html', '_blank');">Explorer</button>
       </section>
     </main>
     <footer>
