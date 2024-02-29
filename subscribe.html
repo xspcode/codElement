@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil CodeElement</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <style>
+      /* styles.css */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      header,
+      .section-avantage,
+      main {
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      header {
+        animation-delay: 0.5s;
+      }
+
+      .section-avantage {
+        animation-delay: 1s;
+      }
+
+      main {
+        animation-delay: 1.5s;
+      }
+
+      :root {
+        --background-color-light: #fafafa;
+        --text-color-light: #000;
+        --header-background-color-light: #f4f4f4;
+        --section-background-color-light: #fff;
+
+        --background-color-dark: #121212;
+        --text-color-dark: #c7c7c7;
+        --header-background-color-dark: #1c1c1c;
+        --section-background-color-dark: #2c2c2c;
+      }
+
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background: var(--background-color);
+        color: var(--text-color);
+        background: var(--background-color-light);
+        color: var(--text-color-light);
+        transition: background-color 0.3s linear, color 0.3s linear;
+      }
+
+      body.dark-mode {
+        background: var(--background-color-dark);
+        color: var(--text-color-dark);
+        --background-color: var(--background-color-dark);
+        --text-color: var(--text-color-dark);
+        --header-background-color: var(--header-background-color-dark);
+        --section-background-color: var(--section-background-color-dark);
+      }
+
+      /* Reste du code CSS... */
+
+      header h1 {
+        padding: 50px 20px;
+        font-size: 2.5em;
+        color: #5ce1e6;
+        background-color: var(--header-background-color);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 20px;
+      }
+
+      .avantages {
+        display: flex;
+        justify-content: space-around;
+        margin: 40px 0;
+      }
+
+      .avantage {
+        max-width: 350px;
+        text-align: center;
+      }
+
+      .icon {
+        width: 50px; /* Ajustez la taille selon vos besoins */
+        height: auto;
+        margin-bottom: 20px;
+        color: var(--text-color); /* Ou toute autre couleur de votre choix */
+      }
+
+      .avantage h3 {
+        margin: 10px 0;
+        color: var(--text-color);
+      }
+
+      .avantage p {
+        font-size: 16px;
+        color: var(--text-color);
+      }
+
+      /* Style du bouton */
+      .btn-subscribe {
+        display: inline-block; /* ou block selon le layout désiré */
+        padding: 15px 30px; /* Ajustez le padding pour correspondre à votre design */
+        background-color: #5ce1e6; /* Couleur de fond initiale */
+        color: white; /* Couleur du texte */
+        text-align: center;
+        border: none;
+        font-weight: bold;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        text-decoration: none; /* Pour un bouton, cela n'est généralement pas nécessaire */
+        position: relative; /* Pour l'animation de soulignement */
+        cursor: pointer; /* Pour indiquer qu'il est cliquable */
+        border-radius: 20px; /* Arrondissement des coins */
+      }
+
+      .btn-subscribe::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: #5ce1e6;
+        transition: width 0.3s ease, background-color 0.3s ease, left 0.3s ease;
+      }
+
+      .btn-subscribe:hover {
+        background-color: transparent; /* Rendre transparent au survol */
+        color: #ff66c4;
+      }
+
+      .btn-subscribe:hover::after {
+        width: 100%;
+        left: 0;
+        background-color: #ff66c4;
+      }
+      .btn-explore {
+        display: inline-block;
+        margin-top: 50px;
+        padding: 15px 30px;
+        background-color: #5ce1e6;
+        color: white;
+        text-align: center;
+        border: none;
+        font-weight: bold;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        border-radius: 20px;
+      }
+
+      .btn-explore::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: #5ce1e6;
+        transition: width 0.3s ease, background-color 0.3s ease, left 0.3s ease;
+      }
+
+      .btn-explore:hover {
+        background-color: transparent;
+        color: #ff66c4;
+      }
+
+      .btn-explore:hover::after {
+        width: 100%;
+        left: 0;
+        background-color: #ff66c4;
+      }
+
+      footer {
+        padding: 20px;
+        background: #333;
+        color: white;
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2em;
+        }
+
+        .avantage-item,
+        p {
+          font-size: 16px;
+        }
+      }
+      /* Styles pour le dark mode et light mode toggle switch */
+      .theme-switch-wrapper {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .theme-switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+      }
+
+      .theme-switch input {
+        display: none;
+      }
+
+      .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: 0.4s;
+        width: 26px;
+      }
+
+      input:checked + .slider {
+        background-color: #66bb6a;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      /* Styles généraux mobiles */
+      @media only screen and (max-width: 768px) {
+        header h1 {
+          font-size: 1.5em;
+          padding: 30px 20px;
+        }
+
+        .avantages {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .avantage {
+          max-width: 100%;
+          margin-bottom: 20px; /* Espacement entre les avantages */
+        }
+
+        .avantage h3 {
+          font-size: 1.2em;
+        }
+
+        .avantage p {
+          font-size: 14px;
+          padding: 0 10px; /* Ajoute un peu de padding sur les côtés */
+        }
+
+        .btn-subscribe {
+          padding: 10px 20px;
+          font-size: 0.9em;
+        }
+
+        .theme-switch-wrapper {
+          top: 10px;
+          right: 10px;
+        }
+      }
+
+      /* Adaptations pour très petits écrans, comme les smartphones en mode portrait */
+      @media only screen and (max-width: 480px) {
+        header h1 {
+          font-size: 1.2em;
+        }
+
+        .avantage h3 {
+          font-size: 1.1em;
+        }
+
+        .avantage p {
+          font-size: 12px;
+        }
+
+        .btn-subscribe {
+          width: auto; /* Permet au bouton de s'adapter à la largeur du texte */
+          font-size: 0.8em;
+        }
+      }
+    </style>
+  </head>
+  <body class="light-mode">
+    <header>
+      <!-- Ajoutez ce toggle switch dans le header ou un endroit approprié de votre page -->
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      </div>
+
+      <h1><span id="typed-output"></span></h1>
+    </header>
+    <main>
+      <section class="section-avantage">
+        <div class="container">
+          <h2>Pourquoi s'abonner à CodeElement ?</h2>
+          <div class="avantages">
+            <div class="avantage">
+              <i class="fas fa-unlock icon"></i>
+              <h3>Accès illimité</h3>
+              <p>
+                Profitez d'un accès illimité à tous nos templates et ressources.
+              </p>
+            </div>
+            <div class="avantage">
+              <i class="fas fa-sync-alt icon"></i>
+              <h3>Mises à jour constantes</h3>
+              <p>
+                Conlultez les mises à jour régulières et découvrez de nouveaux
+                templates chaque mois.
+              </p>
+            </div>
+            <div class="avantage">
+              <i class="fas fa-headset icon"></i>
+              <h3>Support dédié</h3>
+              <p>
+                Bénéficiez d'une assistance personnalisée pour tous vos besoins
+                et projets.
+              </p>
+            </div>
+          </div>
+          <button id="subscribe-button" class="btn-subscribe">
+            S'abonner pour 1€/mois
+          </button>
+        </div>
+        <button id="explore-button" class="btn-explore">Explorer</button>
+      </section>
+    </main>
+    <footer>
+      <p>Contactez-nous à info@codeelement.com</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleSwitch = document.querySelector(
+          '.theme-switch input[type="checkbox"]'
+        );
+        const currentTheme = localStorage.getItem("theme")
+          ? localStorage.getItem("theme")
+          : null;
+
+        if (currentTheme) {
+          document.body.className = currentTheme;
+          toggleSwitch.checked = currentTheme === "dark-mode";
+        }
+
+        toggleSwitch.addEventListener("change", switchTheme, false);
+
+        function switchTheme(e) {
+          if (e.target.checked) {
+            document.body.className = "dark-mode";
+            localStorage.setItem("theme", "dark-mode");
+          } else {
+            document.body.className = "light-mode";
+            localStorage.setItem("theme", "light-mode");
+          }
+        }
+      });
+
+      // Typed.js pour l'animation du texte
+      new Typed("#typed-output", {
+        strings: ["Bienvenue chez CodeElement"],
+        typeSpeed: 50,
+        backSpeed: 25,
+        showCursor: true,
+        cursorChar: "|",
+        loop: false,
+      });
+    </script>
+  </body>
+</html>
