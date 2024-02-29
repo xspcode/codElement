@@ -28,10 +28,25 @@
         padding: 0;
         text-align: center;
         background: var(--background-color);
-        color: var(--text-color);
+  color: var(--text-color);
+        background: var(
+          --background-color-light
+        ); /* Utilisez les variables light mode par défaut */
+        color: var(
+          --text-color-light
+        ); /* Utilisez les variables light mode par défaut */
         transition: background-color 0.3s linear, color 0.3s linear;
       }
 
+      /* En mode sombre, ces variables sont écrasées */
+      body.dark-mode {
+        background: var(--background-color-dark);
+        color: var(--text-color-dark);
+        --background-color: var(--background-color-dark);
+        --text-color: var(--text-color-dark);
+        --header-background-color: var(--header-background-color-dark);
+        --section-background-color: var(--section-background-color-dark);
+      }
       header h1 {
         padding: 50px 20px;
         font-size: 2.5em;
@@ -296,45 +311,32 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <script>
       // script.js
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentTheme = window.localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+        if (currentTheme === "dark" || (!currentTheme && prefersDark)) {
+          document.body.classList.add("dark-mode");
+          toggleSwitch.checked = true;
+        } else {
+          document.body.classList.remove("dark-mode");
+          toggleSwitch.checked = false;
+        }
+      });
+
       const toggleSwitch = document.querySelector(
         '.theme-switch input[type="checkbox"]'
       );
 
       function switchTheme(e) {
         if (e.target.checked) {
-          document.body.style.setProperty(
-            "--background-color",
-            "var(--background-color-dark)"
-          );
-          document.body.style.setProperty(
-            "--text-color",
-            "var(--text-color-dark)"
-          );
-          document.body.style.setProperty(
-            "--header-background-color",
-            "var(--header-background-color-dark)"
-          );
-          document.body.style.setProperty(
-            "--section-background-color",
-            "var(--section-background-color-dark)"
-          );
+          document.body.classList.add("dark-mode");
+          window.localStorage.setItem("theme", "dark");
         } else {
-          document.body.style.setProperty(
-            "--background-color",
-            "var(--background-color-light)"
-          );
-          document.body.style.setProperty(
-            "--text-color",
-            "var(--text-color-light)"
-          );
-          document.body.style.setProperty(
-            "--header-background-color",
-            "var(--header-background-color-light)"
-          );
-          document.body.style.setProperty(
-            "--section-background-color",
-            "var(--section-background-color-light)"
-          );
+          document.body.classList.remove("dark-mode");
+          window.localStorage.setItem("theme", "light");
         }
       }
 
