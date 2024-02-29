@@ -28,7 +28,7 @@
         padding: 0;
         text-align: center;
         background: var(--background-color);
-  color: var(--text-color);
+        color: var(--text-color);
         background: var(
           --background-color-light
         ); /* Utilisez les variables light mode par défaut */
@@ -313,14 +313,17 @@
       // script.js
       document.addEventListener("DOMContentLoaded", function () {
         const currentTheme = window.localStorage.getItem("theme");
+        // Vérifiez si l'utilisateur a choisi un thème ou si le système préfère le dark mode
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
 
+        // Appliquez le dark mode seulement si l'utilisateur l'a sélectionné ou si c'est le préféré du système
         if (currentTheme === "dark" || (!currentTheme && prefersDark)) {
           document.body.classList.add("dark-mode");
           toggleSwitch.checked = true;
         } else {
+          // Assurez-vous que le light mode est appliqué par défaut
           document.body.classList.remove("dark-mode");
           toggleSwitch.checked = false;
         }
