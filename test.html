@@ -11,6 +11,35 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <style>
       /* styles.css */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      header,
+      .section-avantage,
+      main {
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      header {
+        animation-delay: 0.5s;
+      }
+
+      .section-avantage {
+        animation-delay: 1s;
+      }
+
+      main {
+        animation-delay: 1.5s;
+      }
+
       :root {
         --background-color-light: #fafafa;
         --text-color-light: #000;
@@ -22,6 +51,7 @@
         --header-background-color-dark: #1c1c1c;
         --section-background-color-dark: #2c2c2c;
       }
+
       body {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         margin: 0;
@@ -29,16 +59,11 @@
         text-align: center;
         background: var(--background-color);
         color: var(--text-color);
-        background: var(
-          --background-color-light
-        ); /* Utilisez les variables light mode par défaut */
-        color: var(
-          --text-color-light
-        ); /* Utilisez les variables light mode par défaut */
+        background: var(--background-color-light);
+        color: var(--text-color-light);
         transition: background-color 0.3s linear, color 0.3s linear;
       }
 
-      /* En mode sombre, ces variables sont écrasées */
       body.dark-mode {
         background: var(--background-color-dark);
         color: var(--text-color-dark);
@@ -47,6 +72,9 @@
         --header-background-color: var(--header-background-color-dark);
         --section-background-color: var(--section-background-color-dark);
       }
+
+      /* Reste du code CSS... */
+
       header h1 {
         padding: 50px 20px;
         font-size: 2.5em;
@@ -258,7 +286,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="light-mode">
     <header>
       <!-- Ajoutez ce toggle switch dans le header ou un endroit approprié de votre page -->
       <div class="theme-switch-wrapper">
@@ -310,42 +338,33 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <script>
-      // script.js
       document.addEventListener("DOMContentLoaded", function () {
-        const currentTheme = window.localStorage.getItem("theme");
-        // Vérifiez si l'utilisateur a choisi un thème ou si le système préfère le dark mode
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
+        const toggleSwitch = document.querySelector(
+          '.theme-switch input[type="checkbox"]'
+        );
+        const currentTheme = localStorage.getItem("theme")
+          ? localStorage.getItem("theme")
+          : null;
 
-        // Appliquez le dark mode seulement si l'utilisateur l'a sélectionné ou si c'est le préféré du système
-        if (currentTheme === "dark" || (!currentTheme && prefersDark)) {
-          document.body.classList.add("dark-mode");
-          toggleSwitch.checked = true;
-        } else {
-          // Assurez-vous que le light mode est appliqué par défaut
-          document.body.classList.remove("dark-mode");
-          toggleSwitch.checked = false;
+        if (currentTheme) {
+          document.body.className = currentTheme;
+          toggleSwitch.checked = currentTheme === "dark-mode";
+        }
+
+        toggleSwitch.addEventListener("change", switchTheme, false);
+
+        function switchTheme(e) {
+          if (e.target.checked) {
+            document.body.className = "dark-mode";
+            localStorage.setItem("theme", "dark-mode");
+          } else {
+            document.body.className = "light-mode";
+            localStorage.setItem("theme", "light-mode");
+          }
         }
       });
 
-      const toggleSwitch = document.querySelector(
-        '.theme-switch input[type="checkbox"]'
-      );
-
-      function switchTheme(e) {
-        if (e.target.checked) {
-          document.body.classList.add("dark-mode");
-          window.localStorage.setItem("theme", "dark");
-        } else {
-          document.body.classList.remove("dark-mode");
-          window.localStorage.setItem("theme", "light");
-        }
-      }
-
-      toggleSwitch.addEventListener("change", switchTheme, false);
-
-      // script.js
+      // Typed.js pour l'animation du texte
       new Typed("#typed-output", {
         strings: ["Bienvenue chez CodeElement"],
         typeSpeed: 50,
