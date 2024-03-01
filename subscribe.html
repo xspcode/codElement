@@ -28,18 +28,6 @@
         animation: fadeIn 1s ease-out forwards;
       }
 
-      header {
-        animation-delay: 0.5s;
-      }
-
-      .section-avantage {
-        animation-delay: 1s;
-      }
-
-      main {
-        animation-delay: 1.5s;
-      }
-
       :root {
         --background-color-light: #fafafa;
         --text-color-light: #000;
@@ -336,7 +324,7 @@
         </label>
       </div>
 
-      <h1><span id="typed-output"></span></h1>
+      <h1><span id="typed-output"></span> <i class="fa-solid fa-code" style="color: #ff66c4"></i><i class="fa-solid fa-brackets-curly" style="color: #ff66c4"></i></h1>
     </header>
     <main>
       <section class="section-avantage">
@@ -359,7 +347,7 @@
               </p>
             </div>
             <div class="avantage">
-              <i class="fa-brands fa-google-drive"></i>
+              <i class="fa-brands fa-google-drive icon"></i>
               <h3>Hébergement des templates</h3>
               <p>
                 Pour l'accès aux téléchargements, l'hébergement est assuré sur Google Drive.
@@ -406,7 +394,7 @@
 
       // Typed.js pour l'animation du texte
       new Typed("#typed-output", {
-        strings: ["Bienvenue chez CodeElement"],
+        strings: ["CodeElement - Bibliothèque de Templates"],
         typeSpeed: 50,
         backSpeed: 25,
         showCursor: true,
