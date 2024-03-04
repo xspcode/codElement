@@ -94,25 +94,25 @@
         height: 2px; /* Épaisseur du soulignement */
         bottom: 5px; /* Ajustez selon l'espacement désiré du texte au soulignement */
         left: 50%;
-        background-color: #5CE1E6; /* Couleur initiale du soulignement */
+        background-color: #5ce1e6; /* Couleur initiale du soulignement */
         transition: width 0.3s ease, background-color 0.3s ease, left 0.3s ease;
       }
 
       .library-template a:hover::after {
         width: 100%; /* Le soulignement s'étend sur toute la largeur au survol */
         left: 0; /* Alignement correct du soulignement */
-        background-color: #FF66C4; /* Couleur rose au survol */
+        background-color: #ff66c4; /* Couleur rose au survol */
       }
 
       .library-template a:hover {
-        color: #FF66C4; /* Change la couleur du texte en rose au survol */
+        color: #ff66c4; /* Change la couleur du texte en rose au survol */
       }
       /* Style pour les boutons de filtre */
       .filter-select {
         display: inline-block;
         padding: 10px 20px;
         background-color: transparent;
-        color: #5CE1E6; /* Vert bleu clair */
+        color: #5ce1e6; /* Vert bleu clair */
         text-align: center;
         text-decoration: none;
         font-weight: bold;
@@ -130,24 +130,58 @@
         height: 2px;
         bottom: -2px; /* Ajustez si nécessaire pour positionner le soulignement */
         left: 50%;
-        background-color: #5CE1E6;
+        background-color: #5ce1e6;
         transition: width 0.3s ease, left 0.3s ease, background-color 0.3s ease;
       }
 
       .filter-select:hover::after {
         width: 100%;
         left: 0;
-        background-color: #FF66C4; /* Rose au survol */
+        background-color: #ff66c4; /* Rose au survol */
       }
 
       .filter-select:hover {
-        color: #FF66C4;
+        color: #ff66c4;
       }
+          /* Ajoutez ici le style pour la modale */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
     </style>
   </head>
   <body>
     <div id="filter-select">
-      <select class="filter-select" onchange="filterCategory('Page Structures', this.value)">
+      <select
+        class="filter-select"
+        onchange="filterCategory('Page Structures', this.value)"
+      >
         <option value="All">All Page Structures</option>
         <option value="Footers">Footers</option>
         <option value="Login Pages">Login Pages</option>
@@ -155,7 +189,10 @@
         <option value="Sidebars">Sidebars</option>
         <option value="Signup Pages">Signup Pages</option>
       </select>
-      <select class="filter-select" onchange="filterCategory('Page Elements', this.value)">
+      <select
+        class="filter-select"
+        onchange="filterCategory('Page Elements', this.value)"
+      >
         <option value="All">All Page Elements</option>
         <option value="Dropzones">Dropzones</option>
         <option value="Cards">Cards</option>
@@ -175,7 +212,10 @@
         <option value="Modals">Modals</option>
         <option value="Tables">Tables</option>
       </select>
-      <select class="filter-select" onchange="filterCategory('More Items', this.value)">
+      <select
+        class="filter-select"
+        onchange="filterCategory('More Items', this.value)"
+      >
         <option value="All">All More Items</option>
         <option value="Widgets">Widgets</option>
         <option value="Parallax">Parallax</option>
@@ -187,6 +227,11 @@
       </select>
     </div>
     <div id="library-container"></div>
+    <!-- La modale pour l'image agrandie -->
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01" />
+    </div>
     <script>
       let allData = []; // Définition de allData au niveau global
 
@@ -223,14 +268,34 @@
           const libraryElement = document.createElement("div");
           libraryElement.className = "library-template";
           libraryElement.innerHTML = `
-            <img src="${library.image}" alt="${library.title}">
+            <img src="${library.image}" alt="${library.title}" onclick="openModal('${library.image}')">
             <div class="title">${library.title}</div>
             <a href="${library.url}" target="_blank">Open</a>
           `;
           container.appendChild(libraryElement);
         });
       }
+      function openModal(imageUrl) {
+        // Logique pour la modale
+        document.addEventListener(
+          "click",
+          function (event) {
+            if (event.target.matches(".library-template img")) {
+              var modal = document.getElementById("myModal");
+              var modalImg = document.getElementById("img01");
+              modal.style.display = "block";
+              modalImg.src = event.target.src;
+            }
 
+            if (event.target.matches(".close")) {
+              var modal = document.getElementById("myModal");
+              modal.style.display = "none";
+            }
+          },
+          false
+        );
+        console.log("Ouverture de l'image en grand : " + imageUrl);
+      }
       // Assurez-vous d'appeler loadData() pour initialiser allData et afficher les éléments
       window.onload = loadData; // Exécute loadData lorsque la page est chargée
     </script>
