@@ -4,403 +4,490 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Application</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <link rel="icon" href="fav.ico" type="image/x-icon" />
+    <link rel="manifest" href="/codElement/manifest.json" />
     <style>
-      /* styles.css */
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      header,
-      .section-avantage,
-      main {
-        animation: fadeIn 1s ease-out forwards;
-      }
-
       :root {
-        --background-color-light: #fafafa;
-        --text-color-light: #000;
-        --header-background-color-light: #f4f4f4;
-        --section-background-color-light: #fff;
+        --dark-color: hsl(var(--hue), 100%, 9%);
+        --light-color: hsl(var(--hue), 95%, 98%);
+        --base: hsl(var(--hue), 95%, 50%);
+        --complimentary1: hsl(var(--hue-complimentary1), 95%, 50%);
+        --complimentary2: hsl(var(--hue-complimentary2), 95%, 50%);
 
-        --background-color-dark: #121212;
-        --text-color-dark: #c7c7c7;
-        --header-background-color-dark: #1c1c1c;
-        --section-background-color-dark: #2c2c2c;
+        --font-family: "Poppins", system-ui;
+
+        --bg-gradient: linear-gradient(
+          to bottom,
+          hsl(var(--hue), 95%, 99%),
+          hsl(var(--hue), 95%, 84%)
+        );
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        background: var(--background-color);
-        color: var(--text-color);
-        background: var(--background-color-light);
-        color: var(--text-color-light);
-        transition: background-color 0.3s linear, color 0.3s linear;
+        max-width: 1920px;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        font-family: var(--font-family);
+        color: var(--dark-color);
+        background: var(--bg-gradient);
       }
 
-      body.dark-mode {
-        background: var(--background-color-dark);
-        color: var(--text-color-dark);
-        --background-color: var(--background-color-dark);
-        --text-color: var(--text-color-dark);
-        --header-background-color: var(--header-background-color-dark);
-        --section-background-color: var(--section-background-color-dark);
-      }
-
-      /* Reste du code CSS... */
-
-      header h1 {
-        padding: 50px 20px;
-        font-size: 2.5em;
-        color: #5ce1e6;
-        background-color: var(--header-background-color);
-      }
-      .typed-cursor {
-        color: #ff66c4; /* Ou la nuance de rose que vous préférez */
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: auto;
-        padding: 0 20px;
-      }
-
-      .avantages {
-        display: flex;
-        justify-content: space-around;
-        margin: 40px 0;
-      }
-
-      .avantage {
-        max-width: 350px;
-        text-align: center;
-      }
-
-      .icon {
-        width: 50px; /* Ajustez la taille selon vos besoins */
-        height: auto;
-        margin-bottom: 20px;
-        color: var(--text-color); /* Ou toute autre couleur de votre choix */
-      }
-
-      .avantage h3 {
-        margin: 10px 0;
-        color: var(--text-color);
-      }
-
-      .avantage p {
-        font-size: 16px;
-        color: var(--text-color);
-      }
-
-      /* Style du bouton */
-      .btn-subscribe {
-        display: inline-block; /* ou block selon le layout désiré */
-        padding: 15px 30px; /* Ajustez le padding pour correspondre à votre design */
-        background-color: #5ce1e6; /* Couleur de fond initiale */
-        color: white; /* Couleur du texte */
-        text-align: center;
-        border: none;
-        font-weight: bold;
-        transition: color 0.3s ease, background-color 0.3s ease;
-        text-decoration: none; /* Pour un bouton, cela n'est généralement pas nécessaire */
-        position: relative; /* Pour l'animation de soulignement */
-        cursor: pointer; /* Pour indiquer qu'il est cliquable */
-        border-radius: 20px; /* Arrondissement des coins */
-      }
-
-      .btn-subscribe::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 50%;
-        background-color: #5ce1e6;
-        transition: width 0.3s ease, background-color 0.3s ease, left 0.3s ease;
-      }
-
-      .btn-subscribe:hover {
-        background-color: transparent; /* Rendre transparent au survol */
-        color: #ff66c4;
-      }
-
-      .btn-subscribe:hover::after {
-        width: 100%;
-        left: 0;
-        background-color: #ff66c4;
-      }
-      .btn-explore {
-        display: inline-block;
-        margin-top: 50px;
-        padding: 15px 30px;
-        background-color: #5ce1e6;
-        color: white;
-        text-align: center;
-        border: none;
-        font-weight: bold;
-        transition: color 0.3s ease, background-color 0.3s ease;
-        text-decoration: none;
-        position: relative;
-        cursor: pointer;
-        border-radius: 20px;
-      }
-
-      .btn-explore::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 50%;
-        background-color: #5ce1e6;
-        transition: width 0.3s ease, background-color 0.3s ease, left 0.3s ease;
-      }
-
-      .btn-explore:hover {
-        background-color: transparent;
-        color: #ff66c4;
-      }
-
-      .btn-explore:hover::after {
-        width: 100%;
-        left: 0;
-        background-color: #ff66c4;
-      }
-
-      footer {
-        padding: 20px;
-        background: #333;
-        color: white;
-        display: none;
-      }
-
-      @media (max-width: 768px) {
-        header h1 {
-          font-size: 2em;
-        }
-
-        .avantage-item,
-        p {
-          font-size: 16px;
-        }
-      }
-      /* Styles pour le dark mode et light mode toggle switch */
-      .theme-switch-wrapper {
+      .orb-canvas {
         position: fixed;
-        top: 15px;
-        right: 15px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      .overlay {
+        width: 100%;
+        max-width: 1140px;
+        max-height: 640px;
+        padding: 8rem 6rem;
         display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.375);
+        box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
+        border-radius: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+      }
+
+      .overlay__inner {
+        max-width: 36rem;
+      }
+
+      .overlay__title {
+        font-size: 1.875rem;
+        line-height: 2.75rem;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin-bottom: 2rem;
+      }
+
+      .text-gradient {
+        background-image: linear-gradient(
+          45deg,
+          var(--base) 25%,
+          var(--complimentary2)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
+      }
+
+      .overlay__description {
+        font-size: 1rem;
+        line-height: 1.75rem;
+        margin-bottom: 3rem;
+      }
+
+      .overlay__btns {
+        width: 100%;
+        max-width: 30rem;
+        display: flex;
+      }
+
+      .overlay__btn {
+        width: 50%;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--light-color);
+        background: var(--dark-color);
+        border: none;
+        border-radius: 0.5rem;
+        transition: transform 150ms ease;
+        outline-color: hsl(var(--hue), 95%, 50%);
+      }
+
+      .overlay__btn:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+
+      .overlay__btn--transparent {
+        background: transparent;
+        color: var(--dark-color);
+        border: 2px solid var(--dark-color);
+        border-width: 2px;
+        margin-right: 0.75rem;
+      }
+
+      .overlay__btn-emoji {
+        margin-left: 0.375rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--dark-color);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
         align-items: center;
       }
 
-      .theme-switch {
-        display: inline-block;
-        height: 34px;
-        position: relative;
-        width: 60px;
-      }
-
-      .theme-switch input {
-        display: none;
-      }
-
-      .slider {
-        background-color: #ccc;
-        bottom: 0;
-        cursor: pointer;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        background-color: #fff;
-        bottom: 4px;
-        content: "";
-        height: 26px;
-        left: 4px;
-        position: absolute;
-        transition: 0.4s;
-        width: 26px;
-      }
-
-      input:checked + .slider {
-        background-color: #66bb6a;
-      }
-
-      input:checked + .slider:before {
-        transform: translateX(26px);
-      }
-
-      .slider.round {
-        border-radius: 34px;
-      }
-
-      .slider.round:before {
-        border-radius: 50%;
-      }
-      /* Styles généraux mobiles */
-      @media only screen and (max-width: 768px) {
-        header h1 {
-          font-size: 1.5em;
-          padding: 30px 20px;
-        }
-
-        .avantages {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .avantage {
-          max-width: 100%;
-          margin-bottom: 20px; /* Espacement entre les avantages */
-        }
-
-        .avantage h3 {
-          font-size: 1.2em;
-        }
-
-        .avantage p {
-          font-size: 14px;
-          padding: 0 10px; /* Ajoute un peu de padding sur les côtés */
-        }
-
-        .btn-subscribe {
-          padding: 10px 20px;
-          font-size: 0.9em;
-        }
-
-        .theme-switch-wrapper {
-          top: 10px;
-          right: 10px;
+      /* Not too many browser support this yet but it's good to add! */
+      @media (prefers-contrast: high) {
+        .orb-canvas {
+          display: none;
         }
       }
 
-      /* Adaptations pour très petits écrans, comme les smartphones en mode portrait */
-      @media only screen and (max-width: 480px) {
-        header h1 {
-          font-size: 1.2em;
+      @media only screen and (max-width: 1140px) {
+        .overlay {
+          padding: 8rem 4rem;
+        }
+      }
+
+      @media only screen and (max-width: 840px) {
+        body {
+          padding: 1.5rem;
         }
 
-        .avantage h3 {
-          font-size: 1.1em;
+        .overlay {
+          padding: 4rem;
+          height: auto;
         }
 
-        .avantage p {
-          font-size: 12px;
+        .overlay__title {
+          font-size: 1.25rem;
+          line-height: 2rem;
+          margin-bottom: 1.5rem;
         }
 
-        .btn-subscribe {
-          width: auto; /* Permet au bouton de s'adapter à la largeur du texte */
-          font-size: 0.8em;
+        .overlay__description {
+          font-size: 0.875rem;
+          line-height: 1.5rem;
+          margin-bottom: 2.5rem;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .overlay {
+          padding: 1.5rem;
+        }
+
+        .overlay__btns {
+          flex-wrap: wrap;
+        }
+
+        .overlay__btn {
+          width: 100%;
+          font-size: 0.75rem;
+          margin-right: 0;
+        }
+
+        .overlay__btn:first-child {
+          margin-bottom: 1rem;
         }
       }
     </style>
   </head>
-  <body class="light-mode">
-    <header>
-      <!-- Ajoutez ce toggle switch dans le header ou un endroit approprié de votre page -->
-      <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-        </label>
-      </div>
+  <body>
+    <!-- Canvas -->
+    <canvas class="orb-canvas"></canvas>
+    <!-- Overlay -->
+    <div class="overlay">
+      <!-- Overlay inner wrapper -->
+      <div class="overlay__inner">
+        <!-- Title -->
+        <h1 class="overlay__title">
+          Bibliothèques de Composants d'interface utilisateur web en CSS et
+          Javascript. Pourquoi s'abonner à
+          <span class="text-gradient">codElement</span> ?
+        </h1>
+        <!-- Description -->
+        <p class="overlay__description">
+          Accédez sans limite à une large gamme de templates et ressources
+          constamment actualisés. Découvrez régulièrement de nouveaux contenus
+          et bénéficiez d'un hébergement sécurisé sur Google Drive pour tous vos
+          téléchargements.
+          <strong>Explorer nos templates maintenant.</strong>
+        </p>
+        <!-- Buttons -->
+        <div class="overlay__btns">
+          <button class="overlay__btn overlay__btn--transparent">
+            <a
+              href="library.html"
+              target="_blank"
+            >
+              Explorer
+            </a>
+          </button>
 
-      <h1><span id="typed-output"></span> <i class="fa-solid fa-code" style="color: #ff66c4"></i><i class="fa-solid fa-brackets-curly" style="color: #ff66c4"></i></h1>
-    </header>
-    <main>
-      <section class="section-avantage">
-        <div class="container">
-          <h2>Pourquoi s'abonner à CodeElement ?</h2>
-          <div class="avantages">
-            <div class="avantage">
-              <i class="fas fa-unlock icon"></i>
-              <h3>Accès illimité</h3>
-              <p>
-                Profitez d'un accès illimité à tous nos templates et ressources.
-              </p>
-            </div>
-            <div class="avantage">
-              <i class="fas fa-sync-alt icon"></i>
-              <h3>Mises à jour constantes</h3>
-              <p>
-                Conlultez les mises à jour régulières et découvrez de nouveaux
-                templates.
-              </p>
-            </div>
-            <div class="avantage">
-              <i class="fa-brands fa-google-drive icon"></i>
-              <h3>Hébergement des templates</h3>
-              <p>
-                Pour l'accès aux téléchargements, l'hébergement est assuré sur Google Drive.
-              </p>
-            </div>
-          </div>
-          <button id="subscribe-button" class="btn-subscribe" onclick="window.location.href='https://www.buymeacoffee.com/code.xsp/membership';">
-            S'abonner pour 1€/mois
+          <button class="overlay__btn overlay__btn--colors" onclick="window.location.href='https://www.buymeacoffee.com/code.xsp/membership';">
+            <span>S'abonner pour 1€/mois</span>
           </button>
         </div>
-        <button id="explore-button" class="btn-explore" onclick="window.location.href='https://xspcode.github.io/codElement/library.html';">Explorer</button>
-      </section>
-    </main>
-    <footer>
-      <p>Contactez-nous à info@codeelement.com</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const toggleSwitch = document.querySelector(
-          '.theme-switch input[type="checkbox"]'
-        );
-        const currentTheme = localStorage.getItem("theme")
-          ? localStorage.getItem("theme")
-          : null;
+      </div>
+    </div>
+    <script type="module">
+      import * as PIXI from "https://cdn.skypack.dev/pixi.js@5.x";
+      import { KawaseBlurFilter } from "https://cdn.skypack.dev/@pixi/filter-kawase-blur@3.2.0";
+      import SimplexNoise from "https://cdn.skypack.dev/simplex-noise@3.0.0";
+      import hsl from "https://cdn.skypack.dev/hsl-to-hex";
+      import debounce from "https://cdn.skypack.dev/debounce";
 
-        if (currentTheme) {
-          document.body.className = currentTheme;
-          toggleSwitch.checked = currentTheme === "dark-mode";
+      // return a random number within a range
+      function random(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      // map a number from 1 range to another
+      function map(n, start1, end1, start2, end2) {
+        return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
+      }
+
+      // Create a new simplex noise instance
+      const simplex = new SimplexNoise();
+
+      // ColorPalette class
+      class ColorPalette {
+        constructor() {
+          this.setColors();
+          this.setCustomProperties();
         }
 
-        toggleSwitch.addEventListener("change", switchTheme, false);
+        setColors() {
+          // pick a random hue somewhere between 220 and 360
+          this.hue = ~~random(220, 360);
+          this.complimentaryHue1 = this.hue + 30;
+          this.complimentaryHue2 = this.hue + 60;
+          // define a fixed saturation and lightness
+          this.saturation = 95;
+          this.lightness = 50;
 
-        function switchTheme(e) {
-          if (e.target.checked) {
-            document.body.className = "dark-mode";
-            localStorage.setItem("theme", "dark-mode");
-          } else {
-            document.body.className = "light-mode";
-            localStorage.setItem("theme", "light-mode");
-          }
+          // define a base color
+          this.baseColor = hsl(this.hue, this.saturation, this.lightness);
+          // define a complimentary color, 30 degress away from the base
+          this.complimentaryColor1 = hsl(
+            this.complimentaryHue1,
+            this.saturation,
+            this.lightness
+          );
+          // define a second complimentary color, 60 degrees away from the base
+          this.complimentaryColor2 = hsl(
+            this.complimentaryHue2,
+            this.saturation,
+            this.lightness
+          );
+
+          // store the color choices in an array so that a random one can be picked later
+          this.colorChoices = [
+            this.baseColor,
+            this.complimentaryColor1,
+            this.complimentaryColor2,
+          ];
         }
+
+        randomColor() {
+          // pick a random color
+          return this.colorChoices[
+            ~~random(0, this.colorChoices.length)
+          ].replace("#", "0x");
+        }
+
+        setCustomProperties() {
+          // set CSS custom properties so that the colors defined here can be used throughout the UI
+          document.documentElement.style.setProperty("--hue", this.hue);
+          document.documentElement.style.setProperty(
+            "--hue-complimentary1",
+            this.complimentaryHue1
+          );
+          document.documentElement.style.setProperty(
+            "--hue-complimentary2",
+            this.complimentaryHue2
+          );
+        }
+      }
+
+      // Orb class
+      class Orb {
+        // Pixi takes hex colors as hexidecimal literals (0x rather than a string with '#')
+        constructor(fill = 0x000000) {
+          // bounds = the area an orb is "allowed" to move within
+          this.bounds = this.setBounds();
+          // initialise the orb's { x, y } values to a random point within it's bounds
+          this.x = random(this.bounds["x"].min, this.bounds["x"].max);
+          this.y = random(this.bounds["y"].min, this.bounds["y"].max);
+
+          // how large the orb is vs it's original radius (this will modulate over time)
+          this.scale = 1;
+
+          // what color is the orb?
+          this.fill = fill;
+
+          // the original radius of the orb, set relative to window height
+          this.radius = random(window.innerHeight / 6, window.innerHeight / 3);
+
+          // starting points in "time" for the noise/self similar random values
+          this.xOff = random(0, 1000);
+          this.yOff = random(0, 1000);
+          // how quickly the noise/self similar random values step through time
+          this.inc = 0.002;
+
+          // PIXI.Graphics is used to draw 2d primitives (in this case a circle) to the canvas
+          this.graphics = new PIXI.Graphics();
+          this.graphics.alpha = 0.825;
+
+          // 250ms after the last window resize event, recalculate orb positions.
+          window.addEventListener(
+            "resize",
+            debounce(() => {
+              this.bounds = this.setBounds();
+            }, 250)
+          );
+        }
+
+        setBounds() {
+          // how far from the { x, y } origin can each orb move
+          const maxDist =
+            window.innerWidth < 1000
+              ? window.innerWidth / 3
+              : window.innerWidth / 5;
+          // the { x, y } origin for each orb (the bottom right of the screen)
+          const originX = window.innerWidth / 1.25;
+          const originY =
+            window.innerWidth < 1000
+              ? window.innerHeight
+              : window.innerHeight / 1.375;
+
+          // allow each orb to move x distance away from it's x / y origin
+          return {
+            x: {
+              min: originX - maxDist,
+              max: originX + maxDist,
+            },
+            y: {
+              min: originY - maxDist,
+              max: originY + maxDist,
+            },
+          };
+        }
+
+        update() {
+          // self similar "psuedo-random" or noise values at a given point in "time"
+          const xNoise = simplex.noise2D(this.xOff, this.xOff);
+          const yNoise = simplex.noise2D(this.yOff, this.yOff);
+          const scaleNoise = simplex.noise2D(this.xOff, this.yOff);
+
+          // map the xNoise/yNoise values (between -1 and 1) to a point within the orb's bounds
+          this.x = map(
+            xNoise,
+            -1,
+            1,
+            this.bounds["x"].min,
+            this.bounds["x"].max
+          );
+          this.y = map(
+            yNoise,
+            -1,
+            1,
+            this.bounds["y"].min,
+            this.bounds["y"].max
+          );
+          // map scaleNoise (between -1 and 1) to a scale value somewhere between half of the orb's original size, and 100% of it's original size
+          this.scale = map(scaleNoise, -1, 1, 0.5, 1);
+
+          // step through "time"
+          this.xOff += this.inc;
+          this.yOff += this.inc;
+        }
+
+        render() {
+          // update the PIXI.Graphics position and scale values
+          this.graphics.x = this.x;
+          this.graphics.y = this.y;
+          this.graphics.scale.set(this.scale);
+
+          // clear anything currently drawn to graphics
+          this.graphics.clear();
+
+          // tell graphics to fill any shapes drawn after this with the orb's fill color
+          this.graphics.beginFill(this.fill);
+          // draw a circle at { 0, 0 } with it's size set by this.radius
+          this.graphics.drawCircle(0, 0, this.radius);
+          // let graphics know we won't be filling in any more shapes
+          this.graphics.endFill();
+        }
+      }
+
+      // Create PixiJS app
+      const app = new PIXI.Application({
+        // render to <canvas class="orb-canvas"></canvas>
+        view: document.querySelector(".orb-canvas"),
+        // auto adjust size to fit the current window
+        resizeTo: window,
+        // transparent background, we will be creating a gradient background later using CSS
+        transparent: true,
       });
 
-      // Typed.js pour l'animation du texte
-      new Typed("#typed-output", {
-        strings: ["CodeElement - Bibliothèque de Templates"],
-        typeSpeed: 50,
-        backSpeed: 25,
-        showCursor: true,
-        cursorChar: "|",
-        loop: false,
-      });
+      app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
+
+      // Create colour palette
+      const colorPalette = new ColorPalette();
+
+      // Create orbs
+      const orbs = [];
+
+      for (let i = 0; i < 10; i++) {
+        const orb = new Orb(colorPalette.randomColor());
+
+        app.stage.addChild(orb.graphics);
+
+        orbs.push(orb);
+      }
+
+      // Animate!
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        app.ticker.add(() => {
+          orbs.forEach((orb) => {
+            orb.update();
+            orb.render();
+          });
+        });
+      } else {
+        orbs.forEach((orb) => {
+          orb.update();
+          orb.render();
+        });
+      }
+
+      document
+        .querySelector(".overlay__btn--colors")
+        .addEventListener("click", () => {
+          colorPalette.setColors();
+          colorPalette.setCustomProperties();
+
+          orbs.forEach((orb) => {
+            orb.fill = colorPalette.randomColor();
+          });
+        });
     </script>
   </body>
 </html>
